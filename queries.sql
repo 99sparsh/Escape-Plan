@@ -2,9 +2,15 @@ create database spotlight;
 
 use spotlight;
 
+-- ****************** SqlDBM: MySQL ******************;
+-- ***************************************************;
+
+
+-- ************************************** `users`
+
 CREATE TABLE `users`
 (
- `id`         int NOT NULL AUTO_INCREMENT ,
+ `id`         int PRIMARY KEY NOT NULL AUTO_INCREMENT ,
  `name`       varchar(255) NOT NULL ,
  `username`   varchar(255) NOT NULL ,
  `email`      varchar(255) NOT NULL ,
@@ -13,8 +19,7 @@ CREATE TABLE `users`
  `current`    int NOT NULL DEFAULT 1 ,
  `regno`      varchar(20) NOT NULL ,
  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
- `phone`      varchar(20) ,
-PRIMARY KEY (`id`),
+ `phone`      varchar(20)
 );
 
 
