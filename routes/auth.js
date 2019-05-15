@@ -90,7 +90,7 @@ function makeid() { //for random string token
       }
     });
     var mailOptions = {
-      from: 'sparsh.devacc@gmail.com',
+      from: process.env.MAILER,
       to: req.body.email,
       subject: 'Spotlight Password Reset',
      // text: 'Follow the link to reset your password ',

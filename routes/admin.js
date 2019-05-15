@@ -1,0 +1,30 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../config/conn');
+const bcrypt = require('bcryptjs');
+const to = require('../utils/to');
+const validator = require('../utils/validator');
+
+exports.addQuestion = async(req,res)=>{
+    console.log(req.body);
+    let err,result;
+    [err,result] = await to(db.query(`SELECT *  FROM questions WHERE qno = ?`,[req.body.qno]));
+    if(result.length!=0)
+        return res.sendError(null,"Question number already exists");
+    else{
+        bcrypt.genSalt(10,(error,salt)=>{
+            bcrypt.hash(req.body.answer,salt,async(error,ans)=>{
+                if(error)
+                    return res.sendError(error)
+                else{
+                    [err,result] = await to(db.query(`INSERT INTO questions (qno,body,answer,hint) VALUES (?,?,?,?)`,[req.body.qno,req.body.body,ans,req.body.hint]));
+                    if(err)
+                        return res.sendError(err);
+                    else    
+                        return res.sendSuccess(null,"Question "+req.body.qno+" Inserted");
+
+                }
+            })
+        })
+    }
+};
