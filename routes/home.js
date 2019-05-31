@@ -5,12 +5,17 @@ const bcrypt = require('bcryptjs');
 
 exports.home = async(req,res)=>{
     //console.log(req.user);
-    let err,result,ob;
-    [err,result] = await to(db.query(`SELECT qno,body,hint FROM questions WHERE qno = ?`,[req.user.current]));
+    let err,result,ob,hints;
+    [err,result] = await to(db.query(`SELECT qno,body FROM questions WHERE qno = ?`,[req.user.current]));
+    if(err)
+        return res.sendError(err);
+    [err,hints] = await to(db.query(`SELECT body FROM hints WHERE qid = ? AND visibility = ?`,[req.user.current,1]));
     if(err)
         return res.sendError(err);
     ob = result[0];
     ob.username = req.user.username;
+    ob['hints']=hints;
+    
     return res.sendSuccess(ob);
 }
 

@@ -6,7 +6,7 @@ const to = require('../utils/to');
 const validator = require('../utils/validator');
 
 exports.addQuestion = async(req,res)=>{
-    console.log(req.body);
+    //console.log(req.body);
     let err,result;
     [err,result] = await to(db.query(`SELECT *  FROM questions WHERE qno = ?`,[req.body.qno]));
     if(result.length!=0)
@@ -28,3 +28,11 @@ exports.addQuestion = async(req,res)=>{
         })
     }
 };
+
+exports.addHint = async(req,res)=>{
+    let err,result;
+    [err,result] = await to(db.query(`INSERT INTO hints (qid,body,visibility) VALUES (?,?,?)`,[req.body.qid,req.body.body,req.body.visibility]));
+    if(err)
+        return res.sendError(err);
+    return res.sendSuccess(null,"Hint Added for question "+req.body.qid);
+}

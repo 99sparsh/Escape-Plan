@@ -6,6 +6,7 @@ const authSchema = require('../schemas/auth');
 const adminSchema = require('../schemas/admin');
 const homeSchema = require('../schemas/home');
 
+const frontend = require('./frontend');
 const auth = require('./auth');
 const admin = require('./admin');
 const home = require('./home');
@@ -29,10 +30,9 @@ const redirectIfLoggedIn = (req, res, next) => {
     return res.sendError(null, 'Unauthorized access');
   };
 
-//TODO: Add register/login front end for / route
-router.get('/',(req,res)=>{
-    res.send("Spotlight Functioning");
-});
+//Frontend routes
+router.get('/',redirectIfLoggedIn,frontend.index);
+router.get('/admin/addquestion',access(20),frontend.addquestion);
 
 
 //Authentication routes
@@ -43,8 +43,9 @@ router.get('/auth/logout',authenticate,auth.logout);
 router.post('/auth/forgotpassword',redirectIfLoggedIn,validator(authSchema.forgot),auth.forgotpassword);
 router.post('/auth/resetpassword',redirectIfLoggedIn,auth.resetpassword);
 
-//add question admin route
+//admin routes
 router.post('/admin/addquestion',authenticate,access(20),validator(adminSchema.question),admin.addQuestion);
+router.post('/admin/addhint',authenticate,access(20),validator(adminSchema.hint),admin.addHint);
 
 //submit user
 router.post('/home/submit',authenticate,validator(homeSchema.home),home.submit);

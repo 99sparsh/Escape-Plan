@@ -9,3 +9,11 @@ exports.question = Joi.object({
 	})
 	.required()
 });
+
+exports.hint = Joi.object({
+	body: Joi.object({
+		qid: Joi.number().integer().required(),
+		body: Joi.string().required()
+	})
+	.required()
+})

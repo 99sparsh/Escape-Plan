@@ -19,11 +19,13 @@ function makeid() { //for random string token
       let err,result,user;
       [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
       if(result.length!=0){
-        console.log(result);
+       // console.log(result);
         return res.sendError(null,"Email already exists");
       }
-      if(req.body.password!=req.body.password2)
+      if(req.body.password!=req.body.password2){
+       // alert("Passwords do not match");
         return res.sendError(null,"Passwords do not match");
+      }
       else{
         bcrypt.genSalt(10,(error,salt)=>{
             bcrypt.hash(req.body.password,salt,async (error,pass)=>{
@@ -37,7 +39,8 @@ function makeid() { //for random string token
                     console.log(err);
                     if(err)
                         return res.sendError(err);
-                    return res.sendSuccess("Successfully Registered");
+                    //res.redirect('/')
+                    return res.sendSuccess("Successfully Registered. Proceed to Login");
                 }
             })
         })
@@ -64,7 +67,8 @@ function makeid() { //for random string token
     req.logIn(user,err=>{
       if(err)
         return res.sendError(err);
-      return res.sendSuccess(null,"Login Successful!");
+      //return res.sendSuccess(null,"Login Successful!");
+      return res.redirect('/home');
     });
   }
 
