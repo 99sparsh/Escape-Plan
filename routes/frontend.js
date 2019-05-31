@@ -9,3 +9,7 @@ exports.index = (req,res) => {
 exports.addquestion = (req,res) =>{
     return res.sendFile(path.join(public_dir,'addquestion.html'));
 };
+
+exports.addhint = (req,res) =>{
+  return res.sendFile(path.join(public_dir,'addhint.html'));
+}

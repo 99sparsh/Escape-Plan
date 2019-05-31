@@ -33,6 +33,7 @@ const redirectIfLoggedIn = (req, res, next) => {
 //Frontend routes
 router.get('/',redirectIfLoggedIn,frontend.index);
 router.get('/admin/addquestion',access(20),frontend.addquestion);
+router.get('/admin/addhint',access(20),frontend.addhint);
 
 
 //Authentication routes

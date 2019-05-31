@@ -193,33 +193,33 @@ textarea {
 
 
   <div class="tab-content">
-    <div id="AddQuestion">
+    <div id="AddHint">
       <h1>Add Question</h1>
 
-      <form action="/admin/addquestion" method="post">
+      <form action="/admin/addhint" method="post">
 
         
           <div class="field-wrap">
             <label>
                 Question Number<span class="req">*</span>
               </label>
-            <input type="number" name="qno" required autocomplete="off" />
+            <input type="number" name="qid" required autocomplete="off" />
           </div>
 
           <div class="field-wrap">
             <label>
-                Body<span class="req">*</span>
+                Hint Body<span class="req">*</span>
             </label>
             <input type="text" name="body" required autocomplete="off" />
           </div>
         </div>
 
         <div class="field-wrap">
-          <label>
-              Answer<span class="req">*</span>
-            </label>
-          <input type="text" name="answer" required autocomplete="off" />
-        </div>
+            <label>
+                Visibility<span class="req">*</span>
+              </label>
+            <input type="number" name="visibility" required autocomplete="off" />
+          </div>
 
 
         <div class="field-wrap">

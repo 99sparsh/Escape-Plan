@@ -13,7 +13,8 @@ exports.question = Joi.object({
 exports.hint = Joi.object({
 	body: Joi.object({
 		qid: Joi.number().integer().required(),
-		body: Joi.string().required()
+		body: Joi.string().required(),
+		visibility: Joi.number().integer()
 	})
 	.required()
 })
