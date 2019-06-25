@@ -51,10 +51,10 @@ function makeid() { //for random string token
   exports.login = async(req,res)=>{
     let err,user,result;
     [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
-    console.log(result);
+    //console.log(result);
     if(err)
       return res.sendError(err);
-    if(!result)
+    if(result.length==0)
       return res.sendError(null,"User does not exist");
     user = result[0];
     [err,result] = await to(bcrypt.compare(req.body.password,user.password));
@@ -67,8 +67,8 @@ function makeid() { //for random string token
     req.logIn(user,err=>{
       if(err)
         return res.sendError(err);
-      //return res.sendSuccess(null,"Login Successful!");
-      return res.redirect('/home');
+      return res.sendSuccess(null,"Login Successful!");
+      //return res.redirect('/home');
     });
   }
 

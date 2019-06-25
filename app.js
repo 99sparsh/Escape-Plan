@@ -10,7 +10,7 @@ const passport = require('passport');
 const redisStore = require('./config/redis')(session);
 const response = require('./utils/response');
 const routes = require('./routes');
-const passConfig=require('./config/passport');
+const passConfig=require('./config/passport')(passport);
 const app = express();
 
 app.use(morgan('dev'));
@@ -24,8 +24,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
+//passport.serializeUser((user, done) => done(null, user));
+//passport.deserializeUser((user, done) => done(null, user));
 
 app.use(cookieParser('techtatva'));
 app.use(bodyParser.json());

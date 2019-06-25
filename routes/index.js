@@ -4,12 +4,12 @@ const validator = require('../utils/validator');
 
 const authSchema = require('../schemas/auth');
 const adminSchema = require('../schemas/admin');
-const homeSchema = require('../schemas/home');
+const playSchema = require('../schemas/play');
 
 const frontend = require('./frontend');
 const auth = require('./auth');
 const admin = require('./admin');
-const home = require('./home');
+const play = require('./play');
 
 
 const redirectIfLoggedIn = (req, res, next) => {
@@ -48,9 +48,8 @@ router.post('/auth/resetpassword',redirectIfLoggedIn,auth.resetpassword);
 router.post('/admin/addquestion',authenticate,access(20),validator(adminSchema.question),admin.addQuestion);
 router.post('/admin/addhint',authenticate,access(20),validator(adminSchema.hint),admin.addHint);
 
-//submit user
-router.post('/home/submit',authenticate,validator(homeSchema.home),home.submit);
-//home user
-router.get('/home',authenticate,home.home);
+//gameplay
+router.post('/play/submit',authenticate,validator(playSchema.answer),play.submit);
+router.get('/play/:id',authenticate,play.showQuestion);
 
 module.exports = router;
