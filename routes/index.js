@@ -51,5 +51,6 @@ router.post('/admin/addhint',authenticate,access(20),validator(adminSchema.hint)
 //gameplay
 router.post('/play/submit',authenticate,validator(playSchema.answer),play.submit);
 router.get('/play/:id',authenticate,play.showQuestion);
+router.get('/rank',authenticate,play.rank);
 
 module.exports = router;

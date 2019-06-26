@@ -20,7 +20,7 @@ exports.showQuestion = async(req,res)=>{
     ob['hints']=hints;
 
     return res.sendSuccess(ob,"Question "+req.params.id+" available");
-}
+};
 
 exports.submit = async(req,res)=>{
     let err,result,match,ob;
@@ -41,8 +41,7 @@ exports.submit = async(req,res)=>{
         [err,result] = await to(db.query(`UPDATE users SET score = score + ? WHERE id = ?`,[result[0].points, req.user.id]));
         if(err)
             return res.sendError(err);
-    console.log(result);
-        
+    
         [err,result] = await to(db.query(`INSERT INTO submissions (verdict,uid,qno) VALUES (?,?,?)`,['correct',req.user.id,req.query.id]));
         if(err)
             return res.sendError(err);
@@ -54,5 +53,18 @@ exports.submit = async(req,res)=>{
             return res.sendError(err);
         return res.sendSuccess(null,"Wrong Answer");
     }
+
+};
+
+exports.rank = async(req,res) =>{
+    let err,result;
+    [err,result] = await to(db.query(`SELECT 
+        (SELECT COUNT(*) FROM users WHERE score>=x.score) AS rank
+        FROM 
+            users x  
+        WHERE x.id = ?`,[req.user.id]));
+        if(err)
+            return res.sendError(err);
+        return res.sendSuccess(result[0]);
 
 };
