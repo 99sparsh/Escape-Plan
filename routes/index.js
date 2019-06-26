@@ -30,6 +30,10 @@ const redirectIfLoggedIn = (req, res, next) => {
     return res.sendError(null, 'Unauthorized access');
   };
 
+router.get('/home',(req,res)=>{
+  res.send("<h1>Home Page banana hai abhi</h1>");
+})
+
 //Frontend routes
 router.get('/',redirectIfLoggedIn,frontend.index);
 router.get('/admin/addquestion',access(20),frontend.addquestion);
@@ -37,7 +41,6 @@ router.get('/admin/addhint',access(20),frontend.addhint);
 
 
 //Authentication routes
-
 router.post('/auth/register',redirectIfLoggedIn,validator(authSchema.register),auth.register);
 router.post('/auth/login',redirectIfLoggedIn,validator(authSchema.login),auth.login);
 router.get('/auth/logout',authenticate,auth.logout);
