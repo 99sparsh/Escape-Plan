@@ -39,7 +39,6 @@ router.get('/',redirectIfLoggedIn,frontend.index);
 router.get('/admin/addquestion',access(20),frontend.addquestion);
 router.get('/admin/addhint',access(20),frontend.addhint);
 
-
 //Authentication routes
 router.post('/auth/register',redirectIfLoggedIn,validator(authSchema.register),auth.register);
 router.post('/auth/login',redirectIfLoggedIn,validator(authSchema.login),auth.login);

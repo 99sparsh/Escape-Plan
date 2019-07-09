@@ -22,11 +22,9 @@ app.use(session({
   store: redisStore,
   cookie: { maxAge: 604800000 }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-//passport.serializeUser((user, done) => done(null, user));
-//passport.deserializeUser((user, done) => done(null, user));
-
 app.use(cookieParser('techtatva'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
