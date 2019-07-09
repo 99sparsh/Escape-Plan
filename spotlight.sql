@@ -1,7 +1,4 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
---
 -- Host: localhost
 -- Generation Time: Jul 09, 2019 at 12:17 PM
 -- Server version: 5.7.26-0ubuntu0.16.04.1
