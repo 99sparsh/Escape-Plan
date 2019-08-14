@@ -4,12 +4,30 @@ const to = require('../utils/to');
 const bcrypt = require('bcryptjs');
 
 exports.showQuestion = async(req,res)=>{
-    let err,result,ob,hints;
+    let err,result,ob,hints,depends,i,dependencies=[];
     [err,result] = await to(db.query(`SELECT qno,body,visibility FROM questions WHERE qno = ?`,[req.params.id]));
     if(err)
         return res.sendError(err);
     if(result[0]['visibility']==0)
         return res.sendError(null,"This question is not available yet!");
+
+    [err,depends] = await to(db.query(`SELECT depends_on FROM dependencies WHERE qno = ?`,[req.params.id])); //retrieve dependencies
+    if(err)
+        return res.sendError(err);
+
+    if(depends.length!=0){ //dependencies exist
+        for(i=0; i<depends.length; i++)
+            dependencies.push(depends[i]['depends_on']);
+        if(dependencies.length==1)
+            dependencies.push(-1);
+        
+        [err,depends] = await to(db.query(`SELECT * from submissions WHERE verdict=? AND uid=? and qno in (?,?)`,['correct',req.user.id,dependencies[0],dependencies[1]]));
+        if(err)
+            return res.sendError(err);
+        if(depends.length==0)
+            return res.sendError(null,"You need to solve previous questions to view this question!");
+    }
+
 
     [err,hints] = await to(db.query(`SELECT body FROM hints WHERE qid = ? AND visibility = ?`,[req.params.id,1]));
     if(err)
@@ -21,6 +39,7 @@ exports.showQuestion = async(req,res)=>{
 
     return res.sendSuccess(ob,"Question "+req.params.id+" available");
 };
+
 
 exports.submit = async(req,res)=>{
     let err,result,match,ob;
