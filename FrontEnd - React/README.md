@@ -1,6 +1,7 @@
 Check the following methods in Pages/LogIn.js 
 
- ` getQuestions(){
+`
+  getQuestions(){
         console.log("inside getquest")
         fetch('http://localhost:3012/play/1',{
             method: 'GET',
@@ -15,7 +16,8 @@ Check the following methods in Pages/LogIn.js
         ).catch(
             err => console.log(err)
         )
-    }`
+    }
+    `
     
     `
     handleSubmit(){
