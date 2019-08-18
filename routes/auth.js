@@ -68,7 +68,7 @@ function makeid() { //for random string token
       if(err)
         return res.sendError(err);
       return res.sendSuccess(null,"Login Successful!");
-      //return res.redirect('/home');
+      
     });
   }
 

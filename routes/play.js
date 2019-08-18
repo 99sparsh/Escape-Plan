@@ -87,3 +87,29 @@ exports.rank = async(req,res) =>{
         return res.sendSuccess(result[0]);
 
 };
+
+exports.colors = async(req,res)=>{
+    let err,result,i,solved=[],invisible=[],visible=[],colors={};
+    [err,result] = await to(db.query(`SELECT DISTINCT qno FROM submissions WHERE verdict=? AND uid=?`,['correct',req.user.id]));
+    if(err)
+        return res.sendError(err);
+    for(i=0; i<result.length; i++)
+        solved.push(result[i]['qno']);
+    [err,result] = await to(db.query(`SELECT qno FROM questions WHERE visibility=0`));
+    if(err)
+        return res.sendError(err);
+    for(i=0; i<result.length; i++)
+        invisible.push(result[i]['qno']);
+    for(i=1; i<=31; i++){
+        if(solved.findIndex((x)=>{return x==i})==-1&&invisible.findIndex((x)=>{return x==i})==-1)
+            visible.push(i);
+    }
+    console.log(solved);
+    console.log(invisible);
+    console.log(visible);
+    colors['solved']=solved;
+    colors['invisible']=invisible;
+    colors['visible']=visible;
+    return res.sendSuccess(colors);
+    
+}
