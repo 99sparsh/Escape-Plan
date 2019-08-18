@@ -53,7 +53,7 @@ router.post('/admin/addhint',authenticate,access(20),validator(adminSchema.hint)
 //gameplay
 router.post('/play/submit',authenticate,validator(playSchema.answer),play.submit);
 router.get('/play/:id',authenticate,play.showQuestion);
-router.get('/rank',authenticate,play.rank);
-router.get('/colors',authenticate,play.colors);
+router.get('/play/rank',authenticate,play.rank);
+router.get('/play/colors',authenticate,play.colors);
 
 module.exports = router;
