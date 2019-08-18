@@ -36,8 +36,6 @@ CREATE TABLE IF NOT EXISTS `dependencies` (
 --
 
 INSERT INTO `dependencies` (`qno`, `depends_on`) VALUES
-(1, 2),
-(1, 3),
 (4, 2),
 (5, 1),
 (6, 4),
