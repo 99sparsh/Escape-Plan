@@ -30,8 +30,8 @@ CREATE TABLE `hints` (
   `body` varchar(1000) NOT NULL,
   `qid` int(11) NOT NULL,
   `visibility` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` datetime ,
+  `updated_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -55,7 +55,7 @@ CREATE TABLE `questions` (
   `answer` varchar(500) NOT NULL,
   `points` int(11) NOT NULL,
   `visibility` tinyint(4) NOT NULL DEFAULT '0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `submissions` (
   `verdict` enum('correct','wrong') NOT NULL,
   `uid` int(11) NOT NULL,
   `qno` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -105,9 +105,9 @@ CREATE TABLE `users` (
   `access` int(11) NOT NULL DEFAULT '10',
   `current` int(11) NOT NULL DEFAULT '1',
   `regno` varchar(20) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime ,
   `phone` varchar(20) DEFAULT NULL,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` datetime 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

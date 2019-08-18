@@ -15,13 +15,15 @@ function makeid() { //for random string token
   }
 
   exports.register =  async(req,res)=>{
-     // console.log(req.body);
+      console.log(req.body);
       let err,result,user;
-      [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
+      [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]))
+      console.log(err || result);
       if(result.length!=0){
-       // console.log(result);
+        console.log(result);
         return res.sendError(null,"Email already exists");
       }
+      console.log(result);
       if(req.body.password!=req.body.password2){
        // alert("Passwords do not match");
         return res.sendError(null,"Passwords do not match");
@@ -65,10 +67,16 @@ function makeid() { //for random string token
     delete user.password;
     delete user.token;
     req.logIn(user,err=>{
-      if(err)
+      if(err){
+        //console.log("error has happened");
         return res.sendError(err);
-      return res.sendSuccess(null,"Login Successful!");
-      //return res.redirect('/home');
+      }
+      //console.log("Login Successful");
+      console.log(req.session);
+      //console.log(req.session.cookie)
+      return res.send({"status":200, "msg":"Success", "session":req.session,"user":req.user, "passport":req.session.passport, "cookie":req.session.cookie});
+      //return res.sendSuccess(null, "Login Successful");
+      //return res.redirect('/play/1');
     });
   }
 
