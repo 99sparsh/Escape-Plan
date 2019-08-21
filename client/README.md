@@ -1,5 +1,11 @@
 Check the following methods in Pages/LogIn.js 
 
+getQuestions();
+
+handleSubmit();
+
+
+  `
   getQuestions(){
         console.log("inside getquest")
         fetch('http://localhost:3012/play/1',{
@@ -15,7 +21,9 @@ Check the following methods in Pages/LogIn.js
         ).catch(
             err => console.log(err)
         )
-    }
+    }`
+    
+    `
     handleSubmit(){
         fetch('http://localhost:3012/auth/login',{
             method: 'POST',
@@ -39,7 +47,7 @@ Check the following methods in Pages/LogIn.js
                 this.getQuestions()
             }
         )
-    }
+    }`
 
 Console Log on server side after handleSubmit() ===> {status:200, cookie:..., passport:..., session:..., msg:"Login Successful!"}
 Console Log on server side after getQuestion()  ===> {status: ... , msg: "Login First!"}
