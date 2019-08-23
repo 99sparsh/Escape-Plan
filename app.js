@@ -31,9 +31,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((id, done) => done(null, id));
-
 app.use(cookieParser('techtatva'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
