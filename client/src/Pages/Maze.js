@@ -47,10 +47,10 @@ export default class Maze extends Component {
             console.log(resp)
             return resp.json()
         })
-        // .then(data => console.log(JSON.stringify(data)))
+        // .then(data => console.log(data)
+        // .then(that.setState({colors: data})
         .catch(err => console.log(err))
 
-        // .then(that.setState({colors:data}),()=>console.log("Got colors obj"))
 
 
     }
@@ -60,7 +60,8 @@ export default class Maze extends Component {
             case 'w' : return <div className="black tile"  key={j}><span className="placeholder">S</span></div>;
             case 'b' : return <div className="white tile"  key={j}><span className="placeholder">S</span></div>;
             default  : {
-                return <div className="orange tile" onClick={() => this.clicked(cell)} key={j}><span className="placeholder">S</span></div>
+                /* The rest are question numbers */
+                return <div className="orange tile"  onClick={() => this.clicked(cell)} key={j}><span className="placeholder">S</span></div>
                 }
             }
         }
