@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `access` int(11) NOT NULL DEFAULT '10',
   `current` int(11) NOT NULL DEFAULT '1',
   `regno` varchar(20) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime ,
   `phone` varchar(20) DEFAULT NULL,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
