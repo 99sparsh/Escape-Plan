@@ -15,15 +15,17 @@ function makeid() { //for random string token
   }
 
   exports.register =  async(req,res)=>{
-     // console.log(req.body);
+      
       let err,result,user;
-      [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
+      [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]))
+      console.log(err || result);
       if(result.length!=0){
-       // console.log(result);
+        
         return res.sendError(null,"Email already exists");
       }
+      console.log(result);
       if(req.body.password!=req.body.password2){
-       // alert("Passwords do not match");
+       
         return res.sendError(null,"Passwords do not match");
       }
       else{
@@ -51,7 +53,7 @@ function makeid() { //for random string token
   exports.login = async(req,res)=>{
     let err,user,result;
     [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
-    //console.log(result);
+    
     if(err)
       return res.sendError(err);
     if(result.length==0)
@@ -85,7 +87,7 @@ function makeid() { //for random string token
     [err,result] = await to(db.query(`SELECT * FROM users WHERE email = ?`,[req.body.email]));
     if(result.length==0)
       return res.sendError(null,"User does not exist");
-    console.log(result.token);
+    
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -112,7 +114,7 @@ function makeid() { //for random string token
   exports.resetpassword = async(req,res)=>{
     let pass = req.body.password;
     let pass2 = req.body.password2;
-    console.log(req.body);
+    
     if(pass.length<8)
       return res.sendError(null,"Password should be at least 8 characters long");
     if(pass!=pass2)

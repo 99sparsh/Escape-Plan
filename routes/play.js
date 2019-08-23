@@ -6,8 +6,10 @@ const bcrypt = require('bcryptjs');
 exports.showQuestion = async(req,res)=>{
     let err,result,ob,hints,depends,i,dependencies=[];
     [err,result] = await to(db.query(`SELECT qno,body,visibility FROM questions WHERE qno = ?`,[req.params.id]));
-    if(err)
+    if(err){
+        console.log(err);
         return res.sendError(err);
+    }
     if(result[0]['visibility']==0)
         return res.sendError(null,"This question is not available yet!");
 
