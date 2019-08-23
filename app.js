@@ -10,7 +10,7 @@ const passport = require('passport');
 const redisStore = require('./config/redis')(session);
 const response = require('./utils/response');
 const routes = require('./routes');
-const passConfig=require('./config/passport');
+const passConfig=require('./config/passport')(passport);
 const app = express();
 const cors = require('cors');
 
