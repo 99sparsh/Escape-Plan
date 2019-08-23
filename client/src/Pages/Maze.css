@@ -1,0 +1,31 @@
+.mazeWrapper{
+    width: 500px;
+    height:500px;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.tile{
+    width: 20px;
+    height:20px;
+}
+.black{
+    background-color: black;
+}
+.white{
+    background-color: white;   
+}
+.orange{
+    background-color: orange;
+}
+.orange:hover{
+    cursor: pointer;
+    
+}
+.placeholder{
+    visibility: hidden;
+}
