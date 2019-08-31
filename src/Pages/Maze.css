@@ -1,0 +1,74 @@
+.mazeWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.tile {
+  width: 20px;
+  height: 20px;
+}
+.black {
+  background-color: black;
+  z-index: 2;
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.5);
+}
+.white {
+  z-index: 0;
+  background-color: white;
+}
+.orange {
+  z-index: 1;
+  background-color: orange;
+  box-shadow: 0 0px 6px orange;
+}
+.orange:hover {
+  cursor: pointer;
+  background-color: darkviolet;
+  box-shadow: 0 0px 6px darkviolet;
+}
+.placeholder {
+  visibility: hidden;
+}
+.rounded1{
+  border-radius: 20px 0 0 0;
+}
+.rounded2{
+  border-radius: 0 20px 0 0;
+}
+.rounded3{
+  border-radius: 0 0 0 20px;
+}
+.rounded4{
+  border-radius: 0 0 20px 0;
+}
+
+.Maze {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media(max-width:900px){
+    .tile {
+      width: 12px;
+      height: 12px;
+    }
+    .Maze {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+    .mazeWrapper {
+      padding: 0;
+      margin-top: 10px;
+    }
+}
