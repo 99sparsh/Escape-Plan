@@ -38,16 +38,12 @@ class App extends Component {
         <div className="Overall">
           <Switch>
             <Route path="/admin" exact component={Admin} />
-            <Route path="/" exact component={LogIn} />
+            <Route path="/" exact component={Play} />
             <Route path="/login" exact component={LogIn} />
             <Route path="/register" exact component={Register} />
-            <Route path="/play" exact component={Play} loaded={false}/>
+            <Route path="/play" exact component={Play} loaded={false} />
             <Route path="/rules" exact component={Rules} />
             <Route path="/leaderboards" exact component={Leaderboards} />
-            <Route
-              path="/play/:id"
-              component={({ match }) => <Play qno={match.params.id} loaded={true}/>}
-            />
           </Switch>
         </div>
       </Router>

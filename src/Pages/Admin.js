@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import Maze from "./Maze.js";
+import "./que.css";
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isQues: false,
-      isHint: false,
+      addques: false,
+      addhint: false,
       qno: "",
       body: "",
       points: "",
@@ -14,6 +16,7 @@ class Admin extends Component {
       hint: "",
       vis: ""
     };
+    this.getQues = this.getQues.bind(this);
   }
 
   submitQues() {
@@ -61,15 +64,7 @@ class Admin extends Component {
   addQuestion() {
     return (
       <div>
-        <div>Question Number:</div>
-        <div>
-          <input
-            type="text"
-            placeholder="Question Number:"
-            value={this.state.qno}
-            onChange={event => this.setState({ qno: event.target.value })}
-          />
-        </div>
+        <div>Question Number: {this.state.qno}</div>
         <div>Question Body:</div>
         <div>
           <input
@@ -107,15 +102,7 @@ class Admin extends Component {
   addHint() {
     return (
       <div>
-        <div>Question ID:</div>
-        <div>
-          <input
-            type="text"
-            placeholder="Question ID:"
-            value={this.state.qid}
-            onChange={event => this.setState({ qid: event.target.value })}
-          />
-        </div>
+        <div>Question ID: {this.state.qno}</div>
         <div>Hint:</div>
         <div>
           <input
@@ -141,17 +128,37 @@ class Admin extends Component {
     );
   }
 
+  getQues(cell) {
+    this.setState({ qno: cell });
+  }
+
   render() {
     return (
       <div>
-        {!this.state.isQues && !this.state.isHint ? (
-          <div></div>
+        {this.state.qno == "" ? (
+          <div>
+            <Maze fetchQues={this.getQues} />
+          </div>
         ) : (
           <div>
-            {this.state.isQues ? (
-              <div>{this.addQuestion()}</div>
+            {this.state.qno}
+            {!(this.state.addques || this.state.addhint) ? (
+              <div>
+                <button onClick={() => this.setState({ addques: true })}>
+                  Add Question
+                </button>
+                <button onClick={() => this.setState({ addhint: true })}>
+                  Add Hints
+                </button>
+              </div>
             ) : (
-              <div>{this.addHint()}</div>
+              <div>
+                {this.state.addques ? (
+                  <div>{this.addQuestion()}</div>
+                ) : (
+                  <div>{this.addHint()}</div>
+                )}
+              </div>
             )}
           </div>
         )}

@@ -33,23 +33,25 @@ class Maze extends Component {
                 ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b', 'b', 'b', 'w', 'b', 'b', 'b', 31, 'b', 'b', 'b', 'b', 'b', 'w', 'b', 'b', 'b', 'w'],
                 ['q3', 'w', 'w', 'w', 'w', 'b', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'q4'],
             ],
-            colors: {}
+            colors: {},
+            data: {}
         }
     }
     clicked = (cell) => {
         // Not WORKING?
-        // console.log(this.state.colors['visible']);
-        // if(this.state.colors['visible'].includes(cell)){
-        //     console.log(`Question Number ${cell}`);
-        //     this.props.history.push(`/play/${cell}`)      
-        // }
-        // else if(this.state.colors['invisible'].includes(cell)){
-        //     console.log("Question isn't available")
-        // } 
-        // else{
-        //     console.log("You've Solved this question")
-        // }
-        this.props.history.push(`/play/${cell}`);
+         console.log(this.state.colors['visible']);
+         if(this.state.colors['visible'].includes(cell)){
+             console.log(`Question Number ${cell}`);
+                this.props.fetchQues(cell)
+             }
+         else if(this.state.colors['invisible'].includes(cell)){
+             console.log("Question isn't available")
+             this.props.fetchQues(0)
+         } 
+         else{
+             console.log("You've Solved this question")
+             this.props.fetchQues(-1)
+         }
     }
 
     componentDidMount() {
@@ -62,6 +64,7 @@ class Maze extends Component {
                 this.setState({colors: data.data})
                 console.log("Ready!")
                 console.log(this.state.colors['invisible'])
+                console.log(this.state.colors['visible'])
             }
         ).catch(
             err => console.log(err)
@@ -104,7 +107,7 @@ class Maze extends Component {
                     {this.state.maze.map((row, i) => <div className="row" key={i}> {row.map((cell, j) => numberToTile(cell, j))} </div>)}
                 </div>
                 <div className = "rank">
-                    {this.state.ranks}
+                    {this.state.rank}
                 </div>
             </div>
 
