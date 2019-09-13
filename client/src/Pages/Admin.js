@@ -134,7 +134,7 @@ class Admin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="master">
         {this.state.qno == "" ? (
           <div>
             <Maze fetchQues={this.getQues} />

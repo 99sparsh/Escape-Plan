@@ -29,6 +29,13 @@
   background-color: orange;
   box-shadow: 0 0px 6px orange;
 }
+
+.purple{
+  z-index: 1;
+  background-color: darkviolet;
+  box-shadow: 0 0px 6px darkviolet;
+}
+
 .orange:hover {
   cursor: pointer;
   background-color: darkviolet;

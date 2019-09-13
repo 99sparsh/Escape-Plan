@@ -81,7 +81,21 @@ class LogIn extends Component {
             />
           </div>
         </div>
-          {this.state.loggedin?<button className="button button-block logout" onClick={() => this.logOut()}>Logout</button>:<button className="button button-block submit" onClick={() => this.handleSubmit()}>Submit</button>}
+        {this.state.loggedin ? (
+          <button
+            className="button button-block logout"
+            onClick={() => this.logOut()}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="button button-block submit"
+            onClick={() => this.handleSubmit()}
+          >
+            Submit
+          </button>
+        )}
       </div>
     );
   }

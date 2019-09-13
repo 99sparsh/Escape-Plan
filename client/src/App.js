@@ -5,9 +5,7 @@ import LogIn from "./Pages/LogIn";
 import Register from "./Pages/Register";
 import Play from "./Pages/Play";
 import Admin from "./Pages/Admin";
-import Leaderboard from "./Pages/Leaderboards";
 import Rules from "./Pages/Rules";
-import Leaderboards from "./Pages/Leaderboards";
 
 class App extends Component {
   constructor() {
@@ -43,7 +41,6 @@ class App extends Component {
             <Route path="/register" exact component={Register} />
             <Route path="/play" exact component={Play} loaded={false} />
             <Route path="/rules" exact component={Rules} />
-            <Route path="/leaderboards" exact component={Leaderboards} />
           </Switch>
         </div>
       </Router>

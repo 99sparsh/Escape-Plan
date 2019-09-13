@@ -59,7 +59,7 @@ class Play extends Component {
   }
 
   componentDidMount() {
-    /*fetch(`/play/${this.state.qno}`, {
+    fetch(`/play/rank`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -68,13 +68,22 @@ class Play extends Component {
         return resp.json();
       })
       .then(datajson => {
-        console.log(datajson);
-        this.setState({
-          data: datajson.data,
-          loaded: true
-        });
+        this.setState(
+          {
+            data: datajson.data
+          },
+          () => {
+            console.log(datajson.success);
+            if (!datajson.success) {
+              this.props.history.push("/login");
+              this.setState({ loaded: true });
+            }
+          }
+        );
       })
-      .catch(err => console.log(err));*/
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   submit() {

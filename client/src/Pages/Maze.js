@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import "./Maze.css"
+
 class Maze extends Component {
     constructor(props) {
         super(props)
@@ -34,7 +35,8 @@ class Maze extends Component {
                 ['q3', 'w', 'w', 'w', 'w', 'b', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'q4'],
             ],
             colors: {},
-            data: {}
+            data: {},
+            solved: []
         }
     }
     clicked = (cell) => {
@@ -61,10 +63,9 @@ class Maze extends Component {
             resp => {return resp.json()}
         ).then(
             data => {
-                this.setState({colors: data.data})
-                console.log("Ready!")
-                console.log(this.state.colors['invisible'])
-                console.log(this.state.colors['visible'])
+                this.setState({colors: data.data},
+                     () => this.setState({solved: this.state.colors['solved']})
+                    )
             }
         ).catch(
             err => console.log(err)
@@ -97,6 +98,7 @@ class Maze extends Component {
                 case 'b': return <div className="white tile" key={j}><span className="placeholder">S</span></div>;
                 default: {
                     /* The rest are question numbers */
+                    if(this.state.solved.indexOf(cell) > -1) return <div className = "purple tile" onClick = {()=> this.clicked(cell)} key = {j}><span className = "placeholder">S</span></div>
                     return <div className="orange tile" onClick={() => this.clicked(cell)} key={j}><span className="placeholder">S</span></div>
                 }
             }
