@@ -9,83 +9,8 @@ body{
 
 .Overall{
   display: flex;
+  flex-direction: column;
   position: relative;
-}
-
-.sideNav{
-  width: 300px;
-  margin: 0px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #312450;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.navItem{
-  size: 200%;
-  margin: 20px;
-  border-bottom: 2px solid black;
-  animation: transitionIn 2s 1;
-  font-size: 150%;
-}
-
-.QuestionSection{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 15px;
-  size: 150%;
-  font-size: 175%;
-  animation: transitionIn 2s 1;
-}
-
-.HintsSection, .AttemptSection{
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-  width: 200px;
-  overflow:hidden;
-}
-
-.mainSection{
-  margin: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: space-between;
-  width: 950px;
-  animation: transitionIn 2s 1;
-}
-
-.hintsandAttempt{
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-content: space-around;
-  animation: transitionIn 2s 1;
-}
-
-.inpSec{
-  margin: 5px 5px 10px 0px;
-  height: 20px;
-  padding: 7px;
-  width: 300px;
-  border-radius: 15px;
-  border:none;
-}
-
-.butSec{
-  height:35px;
-  margin: 5px;
-  border-radius: 20px;
-}
-
-.hintHeader, .attemptHeader{
-  border-bottom: 2px solid black;
-  font-size: 150%
 }
 
 .image{
@@ -128,9 +53,12 @@ body{
 }
 
 .header{
-  font-size: 200%;
+  font-size: 2em;
   border-bottom: 2px solid black;
   width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
 
 .peopleBoard{
@@ -152,3 +80,34 @@ body{
   flex-wrap: wrap;
   width: 900px;
 }
+
+.rules, .leaderboardsMain {
+    width: 50%;
+    font-size: 1.8em;
+    padding: 10px 20px 30px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    text-align: center;
+    list-style: none;
+}
+
+@media(max-width:650px){
+  .rules, .leaderboardsMain{
+    width: 90%;
+    font-size: 1.3em;
+    padding: 10px 20px 10px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    list-style: disc;
+    text-align: center;
+}}
