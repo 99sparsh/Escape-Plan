@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import Navbar from "./Navbar";
 import '../App.css';
 
 class Leaderboards extends Component{
@@ -6,13 +7,14 @@ class Leaderboards extends Component{
     constructor(){
         super()
         this.state = {
-            people: ['Luke', 'Rey', 'Finn', 'Yoda', 'Anakin']
+            people: ['Luke', 'Rey', 'Finn', 'Yoda', 'Anakin','sass','aaa','aaaaaa', 'Yoda', 'Anakin','sass','aaa','aaaaaa']
         }
     }
 
     render(){
         return(
             <div>
+                <Navbar/>
                 <div className = "leaderboardsMain">
                     <div className = "header">
                         Leaderboards
