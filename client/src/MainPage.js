@@ -16,7 +16,7 @@ class MainPage extends Component{
     }
 
     fetchData(){
-      fetch('http://localhost:3012/play/1').then(
+      fetch('/play/1').then(
             resp => {
               return resp.json();
             }
