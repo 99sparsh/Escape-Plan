@@ -6,7 +6,7 @@ const authSchema = require('../schemas/auth');
 const adminSchema = require('../schemas/admin');
 const playSchema = require('../schemas/play');
 
-const frontend = require('./frontend');
+//const frontend = require('./frontend');
 const auth = require('./auth');
 const admin = require('./admin');
 const play = require('./play');
@@ -36,9 +36,9 @@ router.get('/home',(req,res)=>{
 })
 
 //Frontend routes
-router.get('/',redirectIfLoggedIn,frontend.index);
-router.get('/admin/addquestion',access(20),frontend.addquestion);
-router.get('/admin/addhint',access(20),frontend.addhint);
+router.get('/',redirectIfLoggedIn);
+router.get('/admin/addquestion',access(20));
+router.get('/admin/addhint',access(20));
 
 //Authentication routes
 router.post('/auth/register',redirectIfLoggedIn,validator(authSchema.register),auth.register);
