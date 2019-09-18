@@ -6,7 +6,6 @@ const to = require('../utils/to');
 const validator = require('../utils/validator');
 
 exports.addQuestion = async(req,res)=>{
-    //console.log(req.body);
     let err,result;
     [err,result] = await to(db.query(`SELECT *  FROM questions WHERE qno = ?`,[req.body.qno]));
     if(result.length!=0)
@@ -17,7 +16,7 @@ exports.addQuestion = async(req,res)=>{
                 if(error)
                     return res.sendError(error)
                 else{
-                    [err,result] = await to(db.query(`INSERT INTO questions (qno,body,answer,hint) VALUES (?,?,?,?)`,[req.body.qno,req.body.body,ans,req.body.hint]));
+                    [err,result] = await to(db.query(`INSERT INTO questions (qno,body,answer,points) VALUES (?,?,?,?)`,[req.body.qno,req.body.body,ans,req.body.points]));
                     if(err)
                         return res.sendError(err);
                     else    

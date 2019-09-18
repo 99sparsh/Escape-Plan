@@ -1,0 +1,113 @@
+body{
+  background-color: #5E42A6
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.Overall{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.image{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-end;
+  margin: 10px;
+  animation: transitionIn 2s 1;
+}
+
+.img{
+  width: 250px;
+  height: 250px;
+}
+
+.scrollable{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 17px;
+  box-sizing: content-box;
+}
+
+@keyframes transitionIn{
+  0% {top: 800px; opacity:0;}
+  100% {top:0px; opacity:1;}
+}
+
+.leaderboardsMain{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 950px;
+  height: 100vh;
+  padding: 15px;
+  font-size: 125%;
+  animation: transitionIn 2s 1;
+}
+
+.header{
+  font-size: 2em;
+  border-bottom: 2px solid black;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.peopleBoard{
+  padding: 0px 0px 5px 0px;
+}
+
+.leaderWrapper{
+  margin: 5px;
+  font-size: 120%;
+}
+
+.formMain{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  height : 90vh;
+  margin: 10px;
+  flex-wrap: wrap;
+  width: 900px;
+}
+
+.rules, .leaderboardsMain {
+    width: 50%;
+    font-size: 1.8em;
+    padding: 10px 20px 30px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    text-align: center;
+    list-style: none;
+}
+
+@media(max-width:650px){
+  .rules, .leaderboardsMain{
+    width: 90%;
+    font-size: 1.3em;
+    padding: 10px 20px 10px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    list-style: disc;
+    text-align: center;
+}}
