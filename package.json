@@ -4,7 +4,9 @@
   "description": "Techtatva Alacrity",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd client && npm start",
+    "server": "nodemon app",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Sparsh Agarwal",
   "license": "ISC",
@@ -27,5 +29,8 @@
     "promise-mysql": "^3.3.1",
     "redis": "^2.8.0",
     "save": "^2.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2"
   }
 }

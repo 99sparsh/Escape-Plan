@@ -4,7 +4,6 @@ const to = require("../utils/to");
 const bcrypt = require("bcryptjs");
 
 exports.showQuestion = async (req, res) => {
-  console.log("Here we are!");
   let err,
     result,
     ob,
@@ -66,7 +65,8 @@ exports.showQuestion = async (req, res) => {
 };
 
 exports.submit = async (req, res) => {
-  let err, result, match, ob;
+  let err, result, match, ob, err2, result2, err3, result3;
+
   [err, result] = await to(
     db.query(`SELECT * FROM submissions WHERE verdict=? AND uid=? AND qno=?`, [
       "correct",
@@ -102,6 +102,40 @@ exports.submit = async (req, res) => {
         req.query.id
       ])
     );
+
+    [err3, result3] = await to(
+      db.query(
+        `SELECT completed
+     FROM users 
+     where id=?`,
+        [req.user.id]
+      )
+    );
+    if (result3[0].completed == 0) {
+      //check if all questions solved
+      [err, result] = await to(
+        db.query(
+          `SELECT count(*) as count FROM submissions
+       WHERE verdict = ? and uid = ?`,
+          ["correct", req.user.id]
+        )
+      );
+
+      if (result[0].count == 31) {
+        [err2, result2] = await to(
+          db.query(
+            `UPDATE users
+             SET score = score + 5,
+              completed = 1
+              where id = ?`,
+            [req.user.id]
+          )
+        );
+        if (err2) return res.sendError(err2);
+      }
+      if (err3) return res.sendError(err3);
+    }
+
     if (err) return res.sendError(err);
     return res.sendSuccess(null, "Solved");
   } else {
@@ -118,7 +152,6 @@ exports.submit = async (req, res) => {
 };
 
 exports.rank = async (req, res) => {
-  console.log("Hello There!");
   let err, result;
   [err, result] = await to(
     db.query(
@@ -166,9 +199,6 @@ exports.colors = async (req, res) => {
     )
       visible.push(i);
   }
-  console.log(solved);
-  console.log(invisible);
-  console.log(visible);
   colors["solved"] = solved;
   colors["invisible"] = invisible;
   colors["visible"] = visible;

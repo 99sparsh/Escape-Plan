@@ -17,17 +17,14 @@ function makeid() {
 }
 
 exports.register = async (req, res) => {
-  console.log(req.session);
   let err, result, user;
   [err, result] = await to(
     db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])
   );
   if (result.length != 0) {
-    // console.log(result);
     return res.sendError(null, "Email already exists");
   }
   if (req.body.password != req.body.password2) {
-    // alert("Passwords do not match");
     return res.sendError(null, "Passwords do not match");
   } else {
     bcrypt.genSalt(10, (error, salt) => {
@@ -47,7 +44,7 @@ exports.register = async (req, res) => {
               req.body.phone
             ])
           );
-          console.log(result);
+
           console.log(err);
           if (err) return res.sendError(err);
           //res.redirect('/')
@@ -59,7 +56,6 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  console.log(req.session);
   let err, user, result;
   [err, result] = await to(
     db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])

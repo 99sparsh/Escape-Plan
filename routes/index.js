@@ -5,7 +5,6 @@ const authSchema = require("../schemas/auth");
 const adminSchema = require("../schemas/admin");
 const playSchema = require("../schemas/play");
 
-const frontend = require("./frontend");
 const auth = require("./auth");
 const admin = require("./admin");
 const play = require("./play");
@@ -16,7 +15,6 @@ const redirectIfLoggedIn = (req, res, next) => {
 };
 
 const authenticate = (req, res, next) => {
-  console.log(req.session);
   if (req.isAuthenticated()) return next();
   return res.sendError(null, "Login First!");
 };
@@ -25,15 +23,6 @@ const access = level => (req, res, next) => {
   if (req.user && req.user.access >= level) return next();
   return res.sendError(null, "Unauthorized access");
 };
-
-router.get("/home", (req, res) => {
-  res.send("<h1>Home Page banana hai abhi</h1>");
-});
-
-//Frontend routes
-router.get("/", redirectIfLoggedIn, frontend.index);
-router.get("/admin/addquestion", access(20), frontend.addquestion);
-router.get("/admin/addhint", access(20), frontend.addhint);
 
 //Authentication routes
 router.post(
