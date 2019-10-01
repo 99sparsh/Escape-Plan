@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Login.css";
+import { withRouter } from "react-router-dom";
+import PasswordMask from "react-password-mask";
 
 class Register extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class Register extends Component {
       regno: "",
       username: "",
       phone: "",
-      email: ""
+      email: "",
+      error: ""
     };
   }
 
@@ -37,13 +40,21 @@ class Register extends Component {
       })
       .then(data => {
         if (data.success) this.props.history.push("/login");
+        else {
+          this.setState({ alert: data.msg });
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ error: err.msg });
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div className="form">
+        <div>{this.state.error}</div>
+
         <div className="tab-content">
           <h1>Register</h1>
           <div className="field-wrap">
@@ -80,19 +91,33 @@ class Register extends Component {
             />
           </div>
           <div className="field-wrap">
-            <input
+            {/* <input
               className="req"
               placeholder="Password"
               onChange={e => this.setState({ pass1: e.target.value })}
               value={this.state.pass1}
+            /> */}
+            <PasswordMask
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              value={this.state.pass1}
+              onChange={e => this.setState({ pass1: e.target.value })}
             />
           </div>
           <div className="field-wrap">
-            <input
+            {/* <input
               className="req"
               placeholder="Confirm Password"
               onChange={e => this.setState({ pass2: e.target.value })}
               value={this.state.pass2}
+            /> */}
+            <PasswordMask
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              value={this.state.pass1}
+              onChange={e => this.setState({ pass2: e.target.value })}
             />
           </div>
           <div className="field-wrap">
@@ -104,12 +129,23 @@ class Register extends Component {
             />
           </div>
         </div>
-        <button className="button button-block submit" onClick={() => this.handleSubmit()}>
-          Submit
+        <div>{this.state.alert}</div>
+        <button
+          className="button button-block submit"
+          onClick={() => this.handleSubmit()}
+        >
+          Register
+        </button>
+
+        <button
+          className="button button-block submit"
+          onClick={() => this.props.history.push("/login")}
+        >
+          Log In
         </button>
       </div>
     );
   }
 }
 
-export default Register;
+export default withRouter(Register);

@@ -4,6 +4,7 @@ const to = require("../utils/to");
 const bcrypt = require("bcryptjs");
 
 exports.home = async (req, res) => {
+  //console.log(req.user);
   let err, result, ob, hints;
   [err, result] = await to(
     db.query(`SELECT qno,body FROM questions WHERE qno = ?`, [req.user.current])
@@ -30,8 +31,9 @@ exports.submit = async (req, res) => {
   );
   if (err) return res.sendError(err);
   ans = result[0].answer;
-
+  //console.log(ans);
   [err, match] = await to(bcrypt.compare(req.body.answer, ans));
+  //console.log(match);
 
   if (err) return res.sendError(err);
   if (match) {

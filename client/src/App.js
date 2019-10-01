@@ -6,28 +6,33 @@ import Register from "./Pages/Register";
 import Play from "./Pages/Play";
 import Admin from "./Pages/Admin";
 import Rules from "./Pages/Rules";
+import Home from "./Pages/Home";
+import LogOut from "./Pages/LogOut";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      maze: 0
+      user: { access: 0 },
+      access: ""
     };
   }
 
   componentDidMount() {
-    fetch("/", {
+    fetch("/home", {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => {
         return resp.json();
       })
       .then(data => {
-        console.log("We are inside the componentmount");
-        if (data.msg) {
-          this.setState({ maze: 1 });
-        }
-      });
+        this.setState({ user: data.msg }, this.accessCallback);
+      })
+      .catch(err => console.log(err));
+  }
+
+  accessCallback() {
+    console.log(this.state.user);
   }
 
   render() {
@@ -36,11 +41,13 @@ class App extends Component {
         <div className="Overall">
           <Switch>
             <Route path="/admin" exact component={Admin} />
-            <Route path="/" exact component={Play} />
+            <Route path="/" exact component={Home} />
+            <Route path="/home" exact component={Home} />
             <Route path="/login" exact component={LogIn} />
             <Route path="/register" exact component={Register} />
             <Route path="/play" exact component={Play} loaded={false} />
             <Route path="/rules" exact component={Rules} />
+            <Route path="/logout" exact component={LogOut} />
           </Switch>
         </div>
       </Router>

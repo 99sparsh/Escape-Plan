@@ -30,10 +30,10 @@
   box-shadow: 0 0px 6px orange;
 }
 
-.purple{
+.purple {
   z-index: 1;
-  background-color: darkviolet;
-  box-shadow: 0 0px 6px darkviolet;
+  background-color: green;
+  box-shadow: 0 0px 6px green;
 }
 
 .orange:hover {
@@ -44,16 +44,16 @@
 .placeholder {
   visibility: hidden;
 }
-.rounded1{
+.rounded1 {
   border-radius: 20px 0 0 0;
 }
-.rounded2{
+.rounded2 {
   border-radius: 0 20px 0 0;
 }
-.rounded3{
+.rounded3 {
   border-radius: 0 0 0 20px;
 }
-.rounded4{
+.rounded4 {
   border-radius: 0 0 20px 0;
 }
 
@@ -63,19 +63,19 @@
   display: block;
 }
 
-@media(max-width:900px){
-    .tile {
-      width: 12px;
-      height: 12px;
-    }
-    .Maze {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      display: block;
-    }
-    .mazeWrapper {
-      padding: 0;
-      margin-top: 10px;
-    }
+@media (max-width: 900px) {
+  .tile {
+    width: 12px;
+    height: 12px;
+  }
+  .Maze {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+  .mazeWrapper {
+    padding: 0;
+    margin-top: 10px;
+  }
 }

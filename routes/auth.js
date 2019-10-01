@@ -78,7 +78,7 @@ exports.logout = (req, res) => {
   req.session.destroy(err => {
     if (err) return res.sendError(err);
     req.logout();
-    res.redirect("/");
+    res.sendSuccess(null, { access: 0 });
   });
 };
 

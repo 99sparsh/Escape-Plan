@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Maze from "./Maze.js";
 import "./que.css";
+import Navbar from "./Navbar";
 
 class Admin extends Component {
   constructor(props) {
@@ -8,13 +9,14 @@ class Admin extends Component {
     this.state = {
       addques: false,
       addhint: false,
-      qno: "",
+      qno: 0,
       body: "",
       points: "",
       answer: "",
       qid: "",
       hint: "",
-      vis: ""
+      vis: 0,
+      message: ""
     };
     this.getQues = this.getQues.bind(this);
   }
@@ -36,29 +38,38 @@ class Admin extends Component {
       .then(resp => {
         return resp.json();
       })
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        this.setState({ message: data["msg"], addques: false });
+        this.props.history.push("/admin");
+        this.setState({ qno: "" });
+      })
       .catch(err => console.log(err));
   }
 
   submitHint() {
     this.setState({ isHint: false });
-
     fetch(`/admin/addhint`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        qid: this.state.qid,
+        qid: parseInt(this.state.qno),
         body: this.state.hint,
-        visibility: this.state.vis
+        visibility: parseInt(this.state.vis)
       })
-        .then(resp => {
-          return resp.json();
-        })
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    });
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ message: data["msg"], addques: false });
+        this.props.history.push("/admin");
+        this.setState({ qno: "" });
+      })
+      .catch(err => console.log(err));
   }
 
   addQuestion() {
@@ -132,10 +143,32 @@ class Admin extends Component {
     this.setState({ qno: cell });
   }
 
+  componentDidMount() {
+    this.setState({ qno: "" });
+    fetch("/home", {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data["msg"]["access"] !== 20) {
+          this.props.history.push("/");
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="master">
-        {this.state.qno == "" ? (
+        <Navbar />
+        {this.state.message}
+
+        {this.state.qno === "" ? (
           <div>
             <Maze fetchQues={this.getQues} />
           </div>

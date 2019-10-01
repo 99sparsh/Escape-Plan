@@ -16,9 +16,7 @@ exports.showQuestion = async (req, res) => {
       req.params.id
     ])
   );
-  console.log(result);
   if (err) return res.sendError(err);
-  console.log(result[0]);
   if (result[0]["visibility"] == 0)
     return res.sendError(null, "This question is not available yet!");
 

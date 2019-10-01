@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Login.css";
+import PasswordMask from "react-password-mask";
+import { withRouter } from "react-router-dom";
 
 class LogIn extends Component {
   constructor(props) {
@@ -34,19 +36,20 @@ class LogIn extends Component {
       })
     })
       .then(resp => {
-        //console.log(resp);
         return resp.json();
       })
       .then(data => {
-        console.log(data);
-        if (data.data === 20) this.props.history.push("/admin");
-        else this.props.history.push("/play");
-        //this.getQuestion();
+        if (data.success) {
+          if (data.data === 20) this.props.history.push("/admin");
+          else this.props.history.push("/play");
+        } else {
+          this.setState({ alert: data.msg });
+        }
       });
   }
 
-  logOut() {
-    fetch("/auth/logout", {
+  componentDidMount() {
+    fetch("/home", {
       headers: {
         "Content-Type": "application/json"
       }
@@ -54,8 +57,9 @@ class LogIn extends Component {
       .then(resp => {
         return resp.json();
       })
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+      .then(data => {
+        if (data["msg"]["access"] !== 0) this.props.history.push("/home");
+      });
   }
 
   render() {
@@ -73,32 +77,38 @@ class LogIn extends Component {
           </div>
 
           <div className="field-wrap">
-            <input
+            {/* <input
               className="req"
               placeholder="Full Name"
               onChange={e => this.setState({ pass1: e.target.value })}
               value={this.state.pass1}
+            />  */}
+
+            <PasswordMask
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              value={this.state.pass1}
+              onChange={e => this.setState({ pass1: e.target.value })}
             />
           </div>
         </div>
-        {this.state.loggedin ? (
-          <button
-            className="button button-block logout"
-            onClick={() => this.logOut()}
-          >
-            Logout
-          </button>
-        ) : (
-          <button
-            className="button button-block submit"
-            onClick={() => this.handleSubmit()}
-          >
-            Submit
-          </button>
-        )}
+        <div>{this.state.alert}</div>
+        <button
+          className="button button-block logout"
+          onClick={() => this.props.history.push("/register")}
+        >
+          Register
+        </button>
+        <button
+          className="button button-block submit"
+          onClick={() => this.handleSubmit()}
+        >
+          Submit
+        </button>
       </div>
     );
   }
 }
 
-export default LogIn;
+export default withRouter(LogIn);

@@ -8,9 +8,12 @@ const playSchema = require("../schemas/play");
 const auth = require("./auth");
 const admin = require("./admin");
 const play = require("./play");
+const frontend = require("./frontend");
 
 const redirectIfLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return res.sendSuccess(null, "true");
+  if (req.isAuthenticated()) {
+    return res.sendSuccess(null, req.user);
+  }
   return next();
 };
 
@@ -23,6 +26,11 @@ const access = level => (req, res, next) => {
   if (req.user && req.user.access >= level) return next();
   return res.sendError(null, "Unauthorized access");
 };
+
+//Frontend routes
+router.get("/home", redirectIfLoggedIn, frontend.index);
+router.get("/admin/addquestion", access(20), frontend.addquestion);
+router.get("/admin/addhint", access(20), frontend.addhint);
 
 //Authentication routes
 router.post(

@@ -41,17 +41,14 @@ class Maze extends Component {
     }
     clicked = (cell) => {
         // Not WORKING?
-         console.log(this.state.colors['visible']);
+         
          if(this.state.colors['visible'].includes(cell)){
-             console.log(`Question Number ${cell}`);
                 this.props.fetchQues(cell)
              }
          else if(this.state.colors['invisible'].includes(cell)){
-             console.log("Question isn't available")
              this.props.fetchQues(0)
          } 
          else{
-             console.log("You've Solved this question")
              this.props.fetchQues(-1)
          }
     }
@@ -70,6 +67,8 @@ class Maze extends Component {
         ).catch(
             err => console.log(err)
         )
+
+
         fetch('/play/rank',{
             headers: {
                 "Content-Type":"application/json"
@@ -79,12 +78,30 @@ class Maze extends Component {
             resp => {return resp.json()}
         ).then(
             data =>{ 
-                console.log(data);
                 this.setState({ranks:data})
             }
         ).catch(
             err => console.log(err)
         )
+
+        fetch('/home', {
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        }).then(
+            resp => {
+                
+                return resp.json()
+            }
+        ).then(
+            data => {
+                
+                this.setState({rank:data["msg"]["score"]})
+            }
+        ).catch(
+            err => console.log(err)
+        )
+
     }
 
     render() {
@@ -112,7 +129,6 @@ class Maze extends Component {
                     {this.state.rank}
                 </div>
             </div>
-
         )
     }
 }

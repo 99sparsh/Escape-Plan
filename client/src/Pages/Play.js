@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Popup from "react-popup";
 import Maze from "./Maze";
 import Navbar from "./Navbar";
@@ -26,40 +27,15 @@ class Play extends Component {
       answer: ""
     };
     this.updateState = this.updateState.bind(this);
-
-    fetch(`/play/rank`, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => {
-        return resp.json();
-      })
-      .then(datajson => {
-        this.setState(
-          {
-            data: datajson.data
-          },
-          () => {
-            console.log(datajson.success);
-            if (!datajson.success) {
-              this.props.history.push("/login");
-              this.setState({ loaded: true });
-            }
-          }
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   updateState(cell) {
-    if (cell == 0) {
+    this.setState({ loaded: false });
+    if (cell === 0) {
       this.setState({ alert: "Question not Available" });
       return;
     }
-    if (cell == -1) {
+    if (cell === -1) {
       this.setState({ alert: "Already Solved" });
       return;
     }
@@ -73,7 +49,12 @@ class Play extends Component {
         return resp.json();
       })
       .then(datajson => {
-        console.log(datajson.data);
+        if (!datajson.success) {
+          this.setState({
+            alert: "You Need to solve Previous Questions First"
+          });
+          return;
+        }
         this.setState({
           data: datajson.data,
           loaded: true,
@@ -127,8 +108,8 @@ class Play extends Component {
         return resp.json();
       })
       .then(data => {
-        console.log(data);
         this.setState({ alert: data.msg });
+        this.props.history.push("/play");
       })
       .catch(err => console.log(err));
 
@@ -198,4 +179,4 @@ class Play extends Component {
   }
 }
 
-export default Play;
+export default withRouter(Play);
