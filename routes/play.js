@@ -109,6 +109,7 @@ exports.submit = async (req, res) => {
         [req.user.id]
       )
     );
+
     if (result3[0].completed == 0) {
       //check if all questions solved
       [err, result] = await to(
@@ -150,7 +151,7 @@ exports.submit = async (req, res) => {
 };
 
 exports.rank = async (req, res) => {
-  let err, result;
+  let err, result, sendUser;
   [err, result] = await to(
     db.query(
       `SELECT 

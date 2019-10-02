@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `answer` varchar(500) NOT NULL,
   `points` int(11) NOT NULL,
   `visibility` tinyint(4) NOT NULL DEFAULT '0',
+  `completed` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`qno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const validator = require("../utils/validator");
 
+const db = require("../config/conn");
+
 const authSchema = require("../schemas/auth");
 const adminSchema = require("../schemas/admin");
 const playSchema = require("../schemas/play");
@@ -10,9 +12,16 @@ const admin = require("./admin");
 const play = require("./play");
 const frontend = require("./frontend");
 
-const redirectIfLoggedIn = (req, res, next) => {
+const redirectIfLoggedIn = async (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.sendSuccess(null, req.user);
+    let err, result2;
+    [err, result2] = await to(
+      db.query(`SELECT score FROM users WHERE id=?`, [req.user.id])
+    );
+    sendUser = req.user;
+    sendUser.score = result2[0]["score"];
+
+    return res.sendSuccess(null, sendUser);
   }
   return next();
 };

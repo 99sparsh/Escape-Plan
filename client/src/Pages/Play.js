@@ -106,8 +106,8 @@ class Play extends Component {
         return resp.json();
       })
       .then(data => {
-        this.setState({ alert: data.msg });
         console.log(data);
+        this.setState({ alert: data.msg });
         if (data.msg === "Solved") {
           this.setState({ loaded: false });
           this.props.history.push("/home");
