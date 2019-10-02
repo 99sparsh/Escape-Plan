@@ -94,7 +94,6 @@ class Play extends Component {
   }
 
   submit() {
-    console.log(this.state.answer);
     fetch(`/play/submit?id=${this.state.qno}`, {
       method: "POST",
       body: JSON.stringify({
@@ -109,7 +108,10 @@ class Play extends Component {
       })
       .then(data => {
         this.setState({ alert: data.msg });
-        this.props.history.push("/play");
+        if (data.msg === "Solved") {
+          this.setState({ loaded: false });
+          this.props.history.push("/play");
+        }
       })
       .catch(err => console.log(err));
 

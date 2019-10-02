@@ -74,7 +74,7 @@ class Navbar extends Component {
             <img src={Logo} height="60" width="50" alt="TechTatva '19 "></img>
           </li>
           <li className="li">Username: {this.state.username}</li>
-          <li className="li">Your Rank: {this.state.rank}</li>
+          <li className="li">Rank: {this.state.rank}</li>
           <li className="li">
             <a href="/home">Home</a>
           </li>
@@ -86,7 +86,7 @@ class Navbar extends Component {
             <a href="/logout">Logout</a>
           </li>
           <i className="material-icons">
-            <a href="javascript:void(0);" onClick={() => this.expand()}>
+            <a href="" onClick={() => this.expand()}>
               menu
             </a>
           </i>

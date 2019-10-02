@@ -46,14 +46,14 @@ class Register extends Component {
       })
       .catch(err => {
         this.setState({ error: err.msg });
-        console.log(err);
+        this.props.history.push("/home");
       });
   }
 
   render() {
     return (
       <div className="form">
-        <div>{this.state.error}</div>
+        <div>{this.state.alert}</div>
 
         <div className="tab-content">
           <h1>Register</h1>

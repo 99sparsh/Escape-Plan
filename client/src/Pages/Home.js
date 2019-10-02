@@ -19,7 +19,7 @@ class Home extends Component {
       .then(data => {
         this.setState({ user: data.msg }, this.accessCallback);
       })
-      .catch(err => console.log(err));
+      .catch(err => this.props.history.push("/home"));
   }
 
   accessCallback() {

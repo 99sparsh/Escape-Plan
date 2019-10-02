@@ -59,6 +59,9 @@ class LogIn extends Component {
       })
       .then(data => {
         if (data["msg"]["access"] !== 0) this.props.history.push("/home");
+      })
+      .catch(err => {
+        this.props.history.push("/login");
       });
   }
 
