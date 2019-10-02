@@ -105,6 +105,9 @@ class LogIn extends Component {
           </div>
         </div>
         <div>{this.state.alert}</div>
+        <div className="forgot">
+          <a href="/forgot"> Forgot Password</a>
+        </div>
         <button
           className="button button-block logout"
           onClick={() => this.props.history.push("/register")}
