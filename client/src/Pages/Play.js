@@ -80,7 +80,6 @@ class Play extends Component {
             data: datajson.data
           },
           () => {
-            console.log(datajson.success);
             if (!datajson.success) {
               this.props.history.push("/login");
               this.setState({ loaded: true });
@@ -108,9 +107,10 @@ class Play extends Component {
       })
       .then(data => {
         this.setState({ alert: data.msg });
+        console.log(data);
         if (data.msg === "Solved") {
           this.setState({ loaded: false });
-          this.props.history.push("/play");
+          this.props.history.push("/home");
         }
       })
       .catch(err => console.log(err));

@@ -126,7 +126,7 @@ class Maze extends Component {
                     {this.state.maze.map((row, i) => <div className="row" key={i}> {row.map((cell, j) => numberToTile(cell, j))} </div>)}
                 </div>
                 <div className = "rank">
-                    {this.state.rank}
+                    Score:{this.state.rank}
                 </div>
             </div>
         )

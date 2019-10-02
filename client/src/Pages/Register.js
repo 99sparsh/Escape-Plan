@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Login.css";
 import { withRouter } from "react-router-dom";
 import PasswordMask from "react-password-mask";
+import * as EmailValidator from "email-validator";
+import Recaptcha from "react-recaptcha";
 
 class Register extends Component {
   constructor(props) {
@@ -14,11 +16,21 @@ class Register extends Component {
       username: "",
       phone: "",
       email: "",
-      error: ""
+      error: "",
+      captcha: false
     };
   }
 
   handleSubmit() {
+    if (!this.state.captcha) {
+      this.setState({ alert: "Please Enter the Captcha" });
+      return;
+    }
+
+    if (!EmailValidator.validate(this.state.email)) {
+      this.setState({ alert: "Invalid Email" });
+      return;
+    }
     fetch("/auth/register", {
       method: "post",
       mode: "cors",
@@ -116,7 +128,7 @@ class Register extends Component {
               id="password"
               name="password"
               placeholder="Enter Password"
-              value={this.state.pass1}
+              value={this.state.pass2}
               onChange={e => this.setState({ pass2: e.target.value })}
             />
           </div>
@@ -128,6 +140,14 @@ class Register extends Component {
               value={this.state.username}
             />
           </div>
+        </div>
+        <div className="field-wrap">
+          <Recaptcha
+            sitekey="6LfCcLsUAAAAAJmUfmXay-lJg4I5APvP6-XEm5V0"
+            verifyCallback={() => this.setState({ captcha: true })}
+            render="explicit"
+            onloadCallback={() => console.log("Okay!")}
+          />
         </div>
         <div>{this.state.alert}</div>
         <button

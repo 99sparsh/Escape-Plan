@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import PasswordMask from "react-password-mask";
 import { withRouter } from "react-router-dom";
+import * as EmailValidator from "email-validator";
 
 class LogIn extends Component {
   constructor(props) {
@@ -25,6 +26,11 @@ class LogIn extends Component {
   }
 
   handleSubmit() {
+    if (!EmailValidator.validate(this.state.email)) {
+      this.setState({ alert: "Invalid Email" });
+      return;
+    }
+
     fetch("/auth/login", {
       method: "POST",
       headers: {
@@ -74,7 +80,9 @@ class LogIn extends Component {
             <input
               className="req"
               placeholder="Email Address"
-              onChange={e => this.setState({ email: e.target.value })}
+              onChange={e => {
+                this.setState({ email: e.target.value });
+              }}
               value={this.state.email}
             />
           </div>
