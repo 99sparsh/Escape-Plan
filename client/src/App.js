@@ -30,12 +30,10 @@ class App extends Component {
       .then(data => {
         this.setState({ user: data.msg }, this.accessCallback);
       })
-      .catch(err => console.log(err));
+      .catch(err => this.setState({ alert: err }));
   }
 
-  accessCallback() {
-    console.log(this.state.user);
-  }
+  accessCallback() {}
 
   render() {
     return (

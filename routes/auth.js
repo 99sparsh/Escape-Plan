@@ -88,7 +88,7 @@ exports.forgotpassword = async (req, res) => {
     db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])
   );
   if (result.length == 0) return res.sendError(null, "User does not exist");
-  console.log(result.token);
+
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -116,7 +116,7 @@ exports.forgotpassword = async (req, res) => {
 exports.resetpassword = async (req, res) => {
   let pass = req.body.password;
   let pass2 = req.body.password2;
-  console.log(req.body);
+
   if (pass.length < 8)
     return res.sendError(null, "Password should be at least 8 characters long");
   if (pass != pass2) return res.sendError(null, "Passwords do not match");

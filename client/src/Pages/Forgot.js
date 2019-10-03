@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import "./que.css";
 
 class Forgot extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class Forgot extends Component {
   componentDidMount() {}
 
   forgotPass() {
-    console.log("This is a test");
     fetch("/auth/forgotpassword", {
       method: "POST",
       headers: {
@@ -25,6 +25,9 @@ class Forgot extends Component {
       })
       .then(data => {
         if (data.success) {
+          if (window.confirm("Email Sent. Follow the Link to reset Password"))
+            this.props.history.push("/home");
+        } else {
           this.setState({ alert: data.msg });
         }
       });
@@ -33,23 +36,22 @@ class Forgot extends Component {
   render() {
     return (
       <div>
-        {this.state.alert === "" ? (
-          <div>
-            <input
-              className="req"
-              placeholder="Email Address"
-              onChange={e => {
-                this.setState({ email: e.target.value });
-              }}
-              value={this.state.email}
-            />
-            <button onClick={() => this.forgotPass()}>Submit</button>
+        <div className="form">
+          <div className="tab-content">
+            <div className="field-wrap">
+              <input
+                className="req"
+                placeholder="Email Address"
+                onChange={e => {
+                  this.setState({ email: e.target.value });
+                }}
+                value={this.state.email}
+              />
+              <div>{this.state.alert}</div>
+              <button onClick={() => this.forgotPass()}>Submit</button>
+            </div>
           </div>
-        ) : (
-          <div>
-            <div>{this.state.alert}</div>
-          </div>
-        )}
+        </div>
       </div>
     );
   }

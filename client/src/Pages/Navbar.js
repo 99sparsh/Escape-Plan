@@ -32,7 +32,7 @@ class Navbar extends Component {
         console.log(data);
         this.props.history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch(err => this.setState({ alert: err }));
   }
 
   componentDidMount() {
@@ -71,8 +71,15 @@ class Navbar extends Component {
       <div className="Navbar">
         <ul>
           <li className="logobar">
-            <img src={Logo} height="60" width="50" alt="TechTatva '19 "></img>
+            <div className="logthingy">
+              <img src={Logo} height="72" width="60" alt="TechTatva '19 "></img>
+              <div className="logoname">
+                <div>Escape Plan</div>
+                <div>Alacrity | TechTatva '19</div>
+              </div>
+            </div>
           </li>
+
           <li className="li">Username: {this.state.username}</li>
           <li className="li">Rank: {this.state.rank}</li>
           <li className="li">
@@ -82,13 +89,11 @@ class Navbar extends Component {
           <li className="li">
             <a href="/rules">Rules</a>
           </li>
-          <li>
+          <li className="li">
             <a href="/logout">Logout</a>
           </li>
           <i className="material-icons">
-            <a href="" onClick={() => this.expand()}>
-              menu
-            </a>
+            <a onClick={() => this.expand()}>menu</a>
           </i>
         </ul>
         <br />
