@@ -102,7 +102,7 @@ exports.forgotpassword = async (req, res) => {
     subject: "Spotlight Password Reset",
     // text: 'Follow the link to reset your password ',
     html:
-      '<p>Click <a href="https://spotlight.techtatva.in/resetpassword?token=' +
+      '<p>Click <a href="https://escapeplan.techtatva.in/resetpassword?token=' +
       result[0].token +
       '">here</a> to reset your password</p>'
   };
