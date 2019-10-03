@@ -35,6 +35,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(response);
 
+//run production build. Alt: use nginx reverse proxy
+if (process.env.MODE == "PROD") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  console.log("In production");
+  app.get("/*", function(req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
 app.use("/", routes);
 
 const port = process.env.PORT || 3012;
