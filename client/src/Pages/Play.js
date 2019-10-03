@@ -96,7 +96,7 @@ class Play extends Component {
     fetch(`/play/submit?id=${this.state.qno}`, {
       method: "POST",
       body: JSON.stringify({
-        answer: this.state.answer
+        answer: this.state.answer.toLowerCase().replace(/\s/g, "")
       }),
       headers: {
         "Content-Type": "application/json"

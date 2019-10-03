@@ -31,7 +31,7 @@ class Admin extends Component {
       body: JSON.stringify({
         qno: this.state.qno,
         body: this.state.body,
-        answer: this.state.answer,
+        answer: this.state.answer.toLowerCase().replace(/\s/g, ""),
         points: this.state.points
       })
     })
@@ -42,7 +42,7 @@ class Admin extends Component {
         console.log(data);
         this.setState({ message: data["msg"], addques: false });
         this.props.history.push("/admin");
-        this.setState({ qno: "" });
+        this.setState({ qno: "", body: "", answer: "", points: "" });
       })
       .catch(err => console.log(err));
   }

@@ -38,6 +38,12 @@ li a {
   transition: all 0.3s ease 0s;
 }
 
+button {
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease 0s;
+}
+
 li a:hover {
   color: #0088a9;
 }

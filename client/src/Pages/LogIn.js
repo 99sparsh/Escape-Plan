@@ -74,7 +74,7 @@ class LogIn extends Component {
           </div>
 
           <div className="tab-content">
-            <img src={TechTatva} height="120" width="100" />
+            <img src={TechTatva} height="120" width="100" alt="TechTatva '19" />
             <h2 className="h2">Login</h2>
             <div className="field-wrap">
               <input
