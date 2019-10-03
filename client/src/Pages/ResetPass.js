@@ -9,9 +9,7 @@ class ResetPass extends Component {
     this.state = { token: props.token, pass1: "", pass2: "", alert: "" };
   }
 
-  componentDidMount() {
-    console.log(this.state.token);
-  }
+  componentDidMount() {}
 
   resetPass() {
     fetch(`/auth/resetpassword?token=${this.state.token}`, {

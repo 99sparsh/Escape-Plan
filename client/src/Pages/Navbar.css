@@ -16,6 +16,16 @@ ul {
   color: white;
 }
 
+.logthingy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logoname {
+  margin: 10px;
+}
+
 .li {
   text-decoration: none;
   display: inline-block;
