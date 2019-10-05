@@ -78,7 +78,7 @@ exports.logout = (req, res) => {
   req.session.destroy(err => {
     if (err) return res.sendError(err);
     req.logout();
-    res.sendSuccess(null, { access: 0 });
+    return res.sendSuccess(null, { access: 0 });
   });
 };
 
@@ -129,8 +129,8 @@ exports.resetpassword = async (req, res) => {
           var s = `UPDATE users SET password = ?, token = ? WHERE token = ?`;
           var newtoken = makeid();
           [error, result] = await to(db.query(s, [pass, newtoken, q]));
-          if (error) res.sendError(error);
-          else res.sendSuccess(null, "Password reset successful");
+          if (error) return res.sendError(error);
+          else return res.sendSuccess(null, "Password reset successful");
         }
       });
     });
