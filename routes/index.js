@@ -10,6 +10,7 @@ const playSchema = require("../schemas/play");
 const auth = require("./auth");
 const admin = require("./admin");
 const play = require("./play");
+const frontend = require("./frontend");
 
 const redirectIfLoggedIn = async (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -56,6 +57,8 @@ router.post(
   auth.forgotpassword
 );
 router.post("/auth/resetpassword", redirectIfLoggedIn, auth.resetpassword);
+
+router.get("/home", redirectIfLoggedIn, frontend.index);
 
 //admin routes
 router.post(
