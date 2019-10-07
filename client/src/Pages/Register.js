@@ -5,6 +5,10 @@ import PasswordMask from "react-password-mask";
 import * as EmailValidator from "email-validator";
 import Recaptcha from "react-recaptcha";
 
+//require("dotenv").config();
+
+const API_KEY = process.env.REACT_APP_RECAPTHCA_KEY;
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +23,7 @@ class Register extends Component {
       error: "",
       captcha: false
     };
+    console.log(API_KEY);
   }
 
   handleSubmit() {
