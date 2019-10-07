@@ -57,12 +57,16 @@ class Maze extends Component {
         // const that = this
         fetch('/play/colors')
         .then(
-            resp => {return resp.json()}
+            resp => {return resp.json()
+            }
         ).then(
             data => {
+                if(data.success){
                 this.setState({colors: data.data},
                      () => this.setState({solved: this.state.colors['solved']})
                     )
+                }
+                else this.props.history.push("/login")
             }
         ).catch(
             err => console.log(err)
