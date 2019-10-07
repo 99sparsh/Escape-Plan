@@ -124,7 +124,7 @@ exports.submit = async (req, res) => {
         [err2, result2] = await to(
           db.query(
             `UPDATE users
-             SET score = score + 5,
+             SET score = score + 50,
               completed = 1
               where id = ?`,
             [req.user.id]

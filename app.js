@@ -38,7 +38,6 @@ app.use(response);
 //run production build. Alt: use nginx reverse proxy
 if (process.env.MODE == "PROD") {
   app.use(express.static(path.join(__dirname, "client/build")));
-  console.log("In production");
   app.get("/*", function(req, res) {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });

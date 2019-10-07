@@ -99,7 +99,7 @@ exports.forgotpassword = async (req, res) => {
   var mailOptions = {
     from: process.env.MAILER,
     to: req.body.email,
-    subject: "Spotlight Password Reset",
+    subject: "Escape Plan Password Reset",
     // text: 'Follow the link to reset your password ',
     html:
       '<p>Click <a href="https://escapeplan.techtatva.in/resetpassword?token=' +
