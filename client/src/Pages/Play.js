@@ -66,6 +66,23 @@ class Play extends Component {
   }
 
   componentDidMount() {
+    fetch("/home", {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.success) {
+          if (data.msg.access !== 10 && data.msg.access !== 20)
+            this.props.history.push("/login");
+          else this.rankFetch();
+        } else this.props.history.push("/login");
+      })
+      .catch(err => this.props.history.push("/"));
+  }
+
+  rankFetch() {
     fetch(`/play/rank`, {
       headers: {
         "Content-Type": "application/json"

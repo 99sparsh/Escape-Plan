@@ -36,6 +36,22 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
+    fetch("/home", {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.success) {
+          if (data.msg.access === 10 || data.msg.access === 20)
+            this.fetchRank();
+        }
+      })
+      .catch();
+  }
+
+  fetchRank() {
     fetch(`/play/rank`, {
       headers: {
         "Content-Type": "application/json"
@@ -51,18 +67,6 @@ class Navbar extends Component {
       })
       .catch(err => {
         console.log(err);
-      });
-
-    fetch("/home", {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => {
-        return resp.json();
-      })
-      .then(data => {
-        this.setState({ username: data.msg.username, score: data.msg.score });
       });
   }
 

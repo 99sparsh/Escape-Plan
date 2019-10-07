@@ -41,8 +41,8 @@ class App extends Component {
         <div className="Overall">
           <Switch>
             <Route path="/admin" exact component={Admin} />
-            <Route path="/" exact component={Play} />
-            <Route path="/home" exact component={Play} />
+            <Route path="/" exact component={Home} />
+            <Route path="/home" exact component={Home} />
             <Route path="/login" exact component={LogIn} />
             <Route path="/register" exact component={Register} />
             <Route path="/play" exact component={Play} loaded={false} />
