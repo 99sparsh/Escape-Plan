@@ -172,7 +172,7 @@ class Play extends Component {
           ) : (
             <div className="que2">
               <Maze fetchQues={this.updateState} />
-              {this.state.alert}
+              <div className="alert">{this.state.alert}</div>
             </div>
           )}
         </div>

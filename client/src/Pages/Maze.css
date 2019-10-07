@@ -63,6 +63,10 @@
   display: block;
 }
 
+.rank {
+  font-size: 125%;
+}
+
 @media (max-width: 900px) {
   .tile {
     width: 12px;

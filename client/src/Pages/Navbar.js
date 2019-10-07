@@ -6,7 +6,7 @@ import Logo from "./logo.png";
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { rank: 0 };
+    this.state = { rank: 0, score: 0 };
     this.logOut = this.logOut.bind(this);
   }
 
@@ -62,7 +62,7 @@ class Navbar extends Component {
         return resp.json();
       })
       .then(data => {
-        this.setState({ username: data.msg.username });
+        this.setState({ username: data.msg.username, score: data.msg.score });
       });
   }
 
@@ -82,6 +82,7 @@ class Navbar extends Component {
 
           <li className="li">Username: {this.state.username}</li>
           <li className="li">Rank: {this.state.rank}</li>
+          <li className="li"> Score: {this.state.score}</li>
           <li className="li">
             <a href="/home">Home</a>
           </li>

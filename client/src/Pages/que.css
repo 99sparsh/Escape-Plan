@@ -3,6 +3,10 @@
   margin-right: auto;
 }
 
+.alert {
+  font-size: 150%;
+}
+
 .que {
   display: grid;
   grid-template-columns: 51% 51%;

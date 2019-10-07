@@ -122,11 +122,11 @@ class Maze extends Component {
         }
         return (
             <div className="Maze">
+                {/* <div className="rank">
+                    Score:{this.state.rank}
+                </div> */}
                 <div className="mazeWrapper">
                     {this.state.maze.map((row, i) => <div className="row" key={i}> {row.map((cell, j) => numberToTile(cell, j))} </div>)}
-                </div>
-                <div className = "rank">
-                    Score:{this.state.rank}
                 </div>
             </div>
         )
