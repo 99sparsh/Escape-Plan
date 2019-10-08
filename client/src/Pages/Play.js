@@ -40,7 +40,7 @@ class Play extends Component {
       return;
     }
 
-    fetch(`/play/${cell}`, {
+    fetch(`/api/play/${cell}`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -66,7 +66,7 @@ class Play extends Component {
   }
 
   componentDidMount() {
-    fetch(`/play/rank`, {
+    fetch(`/api/play/rank`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -93,7 +93,7 @@ class Play extends Component {
   }
 
   submit() {
-    fetch(`/play/submit?id=${this.state.qno}`, {
+    fetch(`/api/play/submit?id=${this.state.qno}`, {
       method: "POST",
       body: JSON.stringify({
         answer: this.state.answer.toLowerCase().replace(/\s/g, "")

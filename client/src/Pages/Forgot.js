@@ -11,7 +11,7 @@ class Forgot extends Component {
   componentDidMount() {}
 
   forgotPass() {
-    fetch("/auth/forgotpassword", {
+    fetch("/api/auth/forgotpassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

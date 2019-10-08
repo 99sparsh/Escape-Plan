@@ -151,6 +151,7 @@ exports.submit = async (req, res) => {
 };
 
 exports.rank = async (req, res) => {
+  console.log("I am here");
   let err, result, sendUser;
   [err, result] = await to(
     db.query(

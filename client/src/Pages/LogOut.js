@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 class LogOut extends Component {
   logOut() {
-    fetch("/auth/logout", {
+    fetch("/api/auth/logout", {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => {
@@ -16,7 +16,7 @@ class LogOut extends Component {
   }
 
   componentDidMount() {
-    fetch("/home", {
+    fetch("/api/home", {
       headers: {
         "Content-Type": "application/json"
       }

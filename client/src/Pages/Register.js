@@ -36,7 +36,7 @@ class Register extends Component {
       this.setState({ alert: "Invalid Email" });
       return;
     }
-    fetch("/auth/register", {
+    fetch("/api/auth/register", {
       method: "post",
       mode: "cors",
       headers: {

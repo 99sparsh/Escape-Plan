@@ -12,7 +12,7 @@ class ResetPass extends Component {
   componentDidMount() {}
 
   resetPass() {
-    fetch(`/auth/resetpassword?token=${this.state.token}`, {
+    fetch(`/api/auth/resetpassword?token=${this.state.token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

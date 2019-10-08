@@ -55,7 +55,7 @@ class Maze extends Component {
 
     componentDidMount() {
         // const that = this
-        fetch('/play/colors')
+        fetch('/api/play/colors')
         .then(
             resp => {return resp.json()}
         ).then(
@@ -69,7 +69,7 @@ class Maze extends Component {
         )
 
 
-        fetch('/play/rank',{
+        fetch('/api/play/rank',{
             headers: {
                 "Content-Type":"application/json"
             }
@@ -84,7 +84,7 @@ class Maze extends Component {
             err => console.log(err)
         )
 
-        fetch('/home', {
+        fetch('/api/home', {
             headers: {
                 "Content-Type" : "application/json"
             }

@@ -23,7 +23,7 @@ class Admin extends Component {
 
   submitQues() {
     this.setState({ isQues: false });
-    fetch(`/admin/addquestion`, {
+    fetch(`/api/admin/addquestion`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -49,7 +49,7 @@ class Admin extends Component {
 
   submitHint() {
     this.setState({ isHint: false });
-    fetch(`/admin/addhint`, {
+    fetch(`/api/admin/addhint`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -145,7 +145,7 @@ class Admin extends Component {
 
   componentDidMount() {
     this.setState({ qno: "" });
-    fetch("/home", {
+    fetch("/api/home", {
       headers: {
         "Content-Type": "application/json"
       }

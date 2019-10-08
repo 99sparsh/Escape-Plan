@@ -10,7 +10,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch("/home", {
+    fetch("/api/home", {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => {

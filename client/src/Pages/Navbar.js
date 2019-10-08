@@ -22,7 +22,7 @@ class Navbar extends Component {
   }
 
   logOut() {
-    fetch("/auth/logout", {
+    fetch("/api/auth/logout", {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => {
@@ -36,7 +36,7 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    fetch(`/play/rank`, {
+    fetch(`/api/play/rank`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -53,7 +53,7 @@ class Navbar extends Component {
         console.log(err);
       });
 
-    fetch("/home", {
+    fetch("/api/home", {
       headers: {
         "Content-Type": "application/json"
       }

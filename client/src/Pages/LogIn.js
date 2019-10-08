@@ -22,7 +22,7 @@ class LogIn extends Component {
       return;
     }
 
-    fetch("/auth/login", {
+    fetch("/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -46,7 +46,7 @@ class LogIn extends Component {
   }
 
   componentDidMount() {
-    fetch("/home", {
+    fetch("/api/home", {
       headers: {
         "Content-Type": "application/json"
       }

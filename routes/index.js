@@ -27,8 +27,13 @@ const redirectIfLoggedIn = async (req, res, next) => {
 };
 
 const authenticate = (req, res, next) => {
-  if (req.isAuthenticated()) return next();
-  return res.sendError(null, "Login First!");
+  if (req.isAuthenticated()) {
+    console.log("here1");
+    return next();
+  } else {
+    console.log("here2");
+    return res.sendError(null, "Login First!");
+  }
 };
 
 const access = level => (req, res, next) => {
