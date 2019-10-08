@@ -60,9 +60,16 @@ class Maze extends Component {
             resp => {return resp.json()}
         ).then(
             data => {
-                this.setState({colors: data.data},
-                     () => this.setState({solved: this.state.colors['solved']})
-                    )
+                if (
+                    !data.success &&
+                    (String(data.msg) === "Login First!" ||
+                      String(data.msg) === "Unauthorized access")
+                  ) this.props.history.push("/home");
+                else {
+                    this.setState({colors: data.data},
+                        () => this.setState({solved: this.state.colors['solved']})
+                        );
+                }
             }
         ).catch(
             err => console.log(err)
@@ -77,8 +84,15 @@ class Maze extends Component {
         .then(
             resp => {return resp.json()}
         ).then(
-            data =>{ 
-                this.setState({ranks:data})
+            data =>{
+                if (
+                    !data.success &&
+                    (String(data.msg) === "Login First!" ||
+                      String(data.msg) === "Unauthorized access")
+                  ) this.props.history.push("/home");
+                else { 
+                    this.setState({ranks:data});
+                }
             }
         ).catch(
             err => console.log(err)
@@ -95,8 +109,14 @@ class Maze extends Component {
             }
         ).then(
             data => {
-                
-                this.setState({rank:data["msg"]["score"]})
+                if (
+                    !data.success &&
+                    (String(data.msg) === "Login First!" ||
+                      String(data.msg) === "Unauthorized access")
+                  ) this.props.history.push("/home");
+                else {
+                    this.setState({rank:data["msg"]["score"]});
+                }
             }
         ).catch(
             err => console.log(err)

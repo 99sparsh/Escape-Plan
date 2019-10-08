@@ -45,9 +45,17 @@ class Navbar extends Component {
         return resp.json();
       })
       .then(datajson => {
-        this.setState({
-          rank: datajson.data.rank
-        });
+        if (
+          !datajson.success &&
+          (String(datajson.msg) === "Login First!" ||
+            String(datajson.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          this.setState({
+            rank: datajson.data.rank
+          });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -62,7 +70,15 @@ class Navbar extends Component {
         return resp.json();
       })
       .then(data => {
-        this.setState({ username: data.msg.username, score: data.msg.score });
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          this.setState({ username: data.msg.username, score: data.msg.score });
+        }
       });
   }
 

@@ -39,10 +39,17 @@ class Admin extends Component {
         return resp.json();
       })
       .then(data => {
-        console.log(data);
-        this.setState({ message: data["msg"], addques: false });
-        this.props.history.push("/admin");
-        this.setState({ qno: "", body: "", answer: "", points: "" });
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          this.setState({ message: data["msg"], addques: false });
+          this.props.history.push("/admin");
+          this.setState({ qno: "", body: "", answer: "", points: "" });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -64,10 +71,18 @@ class Admin extends Component {
         return resp.json();
       })
       .then(data => {
-        console.log(data);
-        this.setState({ message: data["msg"], addques: false });
-        this.props.history.push("/admin");
-        this.setState({ qno: "" });
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          console.log(data);
+          this.setState({ message: data["msg"], addques: false });
+          this.props.history.push("/admin");
+          this.setState({ qno: "" });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -154,9 +169,17 @@ class Admin extends Component {
         return resp.json();
       })
       .then(data => {
-        console.log(data);
-        if (data["msg"]["access"] !== 20) {
-          this.props.history.push("/");
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          console.log(data);
+          if (data["msg"]["access"] !== 20) {
+            this.props.history.push("/");
+          }
         }
       })
       .catch(err => console.log(err));

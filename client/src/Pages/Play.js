@@ -106,11 +106,19 @@ class Play extends Component {
         return resp.json();
       })
       .then(data => {
-        console.log(data);
-        this.setState({ alert: data.msg });
-        if (data.msg === "Solved") {
-          this.setState({ loaded: false });
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
           this.props.history.push("/home");
+        else {
+          console.log(data);
+          this.setState({ alert: data.msg });
+          if (data.msg === "Solved") {
+            this.setState({ loaded: false });
+            this.props.history.push("/home");
+          }
         }
       })
       .catch(err => console.log(err));

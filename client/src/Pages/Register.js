@@ -56,7 +56,12 @@ class Register extends Component {
         return resp.json();
       })
       .then(data => {
-        if (data.success) this.props.history.push("/login");
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/login");
         else {
           this.setState({ alert: data.msg });
         }

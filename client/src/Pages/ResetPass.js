@@ -26,7 +26,11 @@ class ResetPass extends Component {
         return resp.json();
       })
       .then(data => {
-        if (data.success) {
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        ) {
           window.confirm("Password Reset, Log In");
           this.props.history.push("/home");
         } else {

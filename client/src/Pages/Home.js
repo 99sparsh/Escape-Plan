@@ -17,7 +17,15 @@ class Home extends Component {
         return resp.json();
       })
       .then(data => {
-        this.setState({ user: data.msg }, this.accessCallback);
+        if (
+          !data.success &&
+          (String(data.msg) === "Login First!" ||
+            String(data.msg) === "Unauthorized access")
+        )
+          this.props.history.push("/home");
+        else {
+          this.setState({ user: data.msg }, this.accessCallback);
+        }
       })
       .catch(err => this.props.history.push("/home"));
   }
