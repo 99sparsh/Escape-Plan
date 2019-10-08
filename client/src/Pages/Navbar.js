@@ -45,10 +45,11 @@ class Navbar extends Component {
         return resp.json();
       })
       .then(datajson => {
-        if (
+        if (!datajson.success && String(datajson.msg) === "Login First!")
+          this.props.history.push("/login");
+        else if (
           !datajson.success &&
-          (String(datajson.msg) === "Login First!" ||
-            String(datajson.msg) === "Unauthorized access")
+          String(datajson.msg) === "Unauthorized access"
         )
           this.props.history.push("/home");
         else {
@@ -70,11 +71,9 @@ class Navbar extends Component {
         return resp.json();
       })
       .then(data => {
-        if (
-          !data.success &&
-          (String(data.msg) === "Login First!" ||
-            String(data.msg) === "Unauthorized access")
-        )
+        if (!data.success && String(data.msg) === "Login First!")
+          this.props.history.push("/login");
+        else if (!data.success && String(data.msg) === "Unauthorized access")
           this.props.history.push("/home");
         else {
           this.setState({ username: data.msg.username, score: data.msg.score });
