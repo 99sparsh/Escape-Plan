@@ -190,28 +190,28 @@ class Admin extends Component {
             <Maze fetchQues={this.getQues} />
           </div>
         ) : (
-          <div>
-            {this.state.qno}
-            {!(this.state.addques || this.state.addhint) ? (
-              <div>
-                <button onClick={() => this.setState({ addques: true })}>
-                  Add Question
+            <div>
+              {this.state.qno}
+              {!(this.state.addques || this.state.addhint) ? (
+                <div>
+                  <button onClick={() => this.setState({ addques: true })}>
+                    Add Question
                 </button>
-                <button onClick={() => this.setState({ addhint: true })}>
-                  Add Hints
+                  <button onClick={() => this.setState({ addhint: true })}>
+                    Add Hints
                 </button>
-              </div>
-            ) : (
-              <div>
-                {this.state.addques ? (
-                  <div>{this.addQuestion()}</div>
-                ) : (
-                  <div>{this.addHint()}</div>
+                </div>
+              ) : (
+                  <div>
+                    {this.state.addques ? (
+                      <div>{this.addQuestion()}</div>
+                    ) : (
+                        <div>{this.addHint()}</div>
+                      )}
+                  </div>
                 )}
-              </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
       </div>
     );
   }

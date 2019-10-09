@@ -7,7 +7,6 @@ import Recaptcha from "react-recaptcha";
 
 //require("dotenv").config();
 
-const API_KEY = process.env.REACT_APP_RECAPTHCA_KEY;
 
 class Register extends Component {
   constructor(props) {
@@ -21,14 +20,30 @@ class Register extends Component {
       phone: "",
       email: "",
       error: "",
-      captcha: false
+      captcha: false,
+      alert: ""
     };
-    console.log(API_KEY);
+
   }
 
   handleSubmit() {
     if (!this.state.captcha) {
       this.setState({ alert: "Please Enter the Captcha" });
+      return;
+    }
+
+    if (this.state.name === "" || this.state.regno === "" || this.state.username === "" || this.state.phone === "" || this.state.email == "") {
+      this.setState({ alert: "Please Enter The Form Completely", pass1: "", pass2: "" });
+      return;
+    }
+
+    if (this.state.pass1.length < 8) {
+      this.setState({ alert: "Password must be at least 8 characters long", pass1: "", pass2: "" });
+      return;
+    }
+
+    if (this.state.pass1 !== this.state.pass2) {
+      this.setState({ alert: "Passwords Don't Match", pass1: "", pass2: "" });
       return;
     }
 

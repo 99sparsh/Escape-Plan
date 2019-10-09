@@ -107,7 +107,7 @@ exports.forgotpassword = async (req, res) => {
       '">here</a> to reset your password</p>'
   };
 
-  transporter.sendMail(mailOptions, function(error, info) {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) return res.sendError(error);
     else return res.sendSuccess(info.response, "Email sent");
   });

@@ -136,12 +136,13 @@ class Play extends Component {
               <div className="col2">
                 <div className="question">
                   <h2>Question</h2>
+                  {this.state.qno}
                   {this.state.data.body}
                 </div>
                 {this.state.data.hints.length !== 0 ? (
                   <div className="hints">
                     <h2>Hints</h2>
-                    {this.state.data.hints.map(function(value, i) {
+                    {this.state.data.hints.map(function (value, i) {
                       return (
                         <div key={i}>
                           {value.body}
@@ -151,8 +152,8 @@ class Play extends Component {
                     })}
                   </div>
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 <div className="Input answer">
                   <input
                     className="textInput"
@@ -176,11 +177,11 @@ class Play extends Component {
               </div>
             </div>
           ) : (
-            <div className="que2">
-              <Maze fetchQues={this.updateState} />
-              <div className="alert">{this.state.alert}</div>
-            </div>
-          )}
+              <div className="que2">
+                <Maze fetchQues={this.updateState} />
+                <div className="alert">{this.state.alert}</div>
+              </div>
+            )}
         </div>
       </>
     );
